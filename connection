@@ -3,10 +3,18 @@ package jdbc;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.DriverManager;
 
-public class ConexaoDB {
+public class teste {
     public static void main(String... x) {
-        DriverManager.getConnection("jdbc:mysql://localhost:3306/byte_bank?user=root&password=root");
+        try {
+            Connection connection = DriverManager
+                    .getConnection("jdbc:mysql://127.0.0.1:3306/java?user=Marcolin&password=mateiformiga1");
+
+            System.out.println("Recuperei a conexão");
+
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }
 }
