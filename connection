@@ -4,16 +4,19 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class teste {
+public class Teste {
     public static void main(String... x) {
         try {
-            Connection connection = DriverManager
-                    .getConnection("jdbc:mysql://127.0.0.1:3306/java?user=Marcolin&password=mateiformiga1");
+            // Registrando o driver JDBC
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Estabelecendo a conexão com o banco de dados
+            Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/java?user=Marcolin&password=mateiformiga1");
 
             System.out.println("Recuperei a conexão");
 
             connection.close();
-        } catch (SQLException e) {
+        } catch (ClassNotFoundException | SQLException e) {
             System.out.println(e);
         }
     }
