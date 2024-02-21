@@ -15,16 +15,19 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <dependencies>
-        <!-- MySQL Connector/J -->
+    <dependencies><!-- MySQL Connector/J -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.33</version>
         </dependency>
-
-        <!-- PostgreSQL JDBC Driver -->
-        <dependency>
+             
+<dependency>  <!-- Dependência para Spring Boot Data JPA -->
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+             
+        <dependency>  <!-- PostgreSQL JDBC Driver -->
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>42.7.1</version>
