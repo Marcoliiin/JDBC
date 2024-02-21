@@ -1,0 +1,39 @@
+package jdbc.example;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class manipulacao {
+    public static void main(String[] args) {
+        Connection connection = null;
+        try {
+            // Obtém a conexão usando a classe ConnectionFactory
+            connection = conexao.getConnection();
+
+            // Criar uma declaração SQL para a inserção
+            String sql = "INSERT INTO teste (id_junior) VALUES ('193')";
+
+            // Criar um objeto Statement
+            Statement stmt = connection.createStatement();
+
+            // Executar a declaração SQL
+            int linhasAfetadas = stmt.executeUpdate(sql);
+            System.out.println("Linhas afetadas: " + linhasAfetadas);
+
+            // Fechar o Statement (recomendado)
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                // Fechar a conexão (no bloco finally para garantir que seja fechada, mesmo que ocorra uma exceção)
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
