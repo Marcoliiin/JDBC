@@ -8,12 +8,12 @@ public class Teste {
     public static void main(String... x) {
         try {
             // Registrando o driver JDBC
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("org.postgresql.Driver");
 
             // Estabelecendo a conexão com o banco de dados
-            Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/java?user=Marcolin&password=mateiformiga1");
+            Connection connection = DriverManager.getConnection("jdbc:postgresql://ep-summer-math-a5w180vg.us-east-2.aws.neon.tech:5432/marcolindatabase", "gabrielmarcolin10", "B3coUbAuq4Hn");
 
-            System.out.println("Recuperei a conexão");
+            System.out.println("Conexão estabelecida com sucesso!");
 
             connection.close();
         } catch (ClassNotFoundException | SQLException e) {
