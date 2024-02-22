@@ -10,7 +10,9 @@ public class manipulacao {
         try (Scanner sc = new Scanner(System.in)) {
             System.out.println("Digite um valor para a coluna id_junior:");
             int id = sc.nextInt();
-
+            sc.nextLine();
+            System.out.println("Digite um nome para a pessoa:")
+             String nome = sc.nextLine
             // Tentativa de obter a conexão e auto fechá-la ao final do bloco try
             try (Connection connection = conexao.getConnection()) {
                 // Preparar a consulta SQL para inserção, usando placeholders (?)
@@ -18,7 +20,9 @@ public class manipulacao {
                 try (PreparedStatement statement = connection.prepareStatement(sql)) {
                     // Substituir o placeholder pelo valor real
                     statement.setInt(1, id); // Define o valor de id_junior
-
+                    sql = "INSERT INTO teste (nome) VALUES (?)";
+                    try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                        statement.setInt(1, id);
                     // Executar a atualização
                     int linhasAfetadas = statement.executeUpdate();
                     System.out.println("Linhas afetadas: " + linhasAfetadas);
@@ -28,4 +32,5 @@ public class manipulacao {
             }
         }
     }
+ }
 }
