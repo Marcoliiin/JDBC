@@ -14,22 +14,28 @@ public class manipulacao {
             System.out.println("Digite um nome para a pessoa:");
             String nomes = sc.nextLine();
 
-            // Tentativa de obter a conexão e auto fechá-la ao final do bloco try
+            // o conexao.getConnection() está chamando o método get.connection da classe conexao
             try (Connection connection = conexao.getConnection()) {
-                // Preparar a consulta SQL para inserção, usando placeholders (?)
                 String sql = "INSERT INTO teste (id_junior) VALUES (?)";
+
+                //connection.prepareStatement(sql) literalmente prepara a sql
+                //conectando com o banco de dados, utilizando o PreparedStatement,
+                //que seria uma interface do java que basicamente precompila uma SQL
+                //onde a variável statement recebe a SQL
+
                 try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                    // Substituir o placeholder pelo valor real
-                    statement.setInt(1, id); // Define o valor de id_junior
+                    statement.setInt(1, id);
                     String sql2 = "INSERT INTO nome (nomedapessoa) VALUES (?)";
                     try (PreparedStatement estado = connection.prepareStatement(sql2)) {
                         estado.setString(1, nomes);
                         // Executar a atualização
                         int linhasAfetadas = estado.executeUpdate();
+                        int linhasAfetadas2 = statement.executeUpdate();
                         System.out.println("Linhas afetadas: " + linhasAfetadas);
+                        System.out.println("Linhas afetadas2: " + linhasAfetadas);
                     }
-                } catch (SQLException e) {
-                    e.printStackTrace();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
