@@ -1,9 +1,9 @@
 package jdbc.example;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
-import java.sql.PreparedStatement;
 
 public class manipulacao {
     public static void main(String[] args) {
@@ -11,8 +11,8 @@ public class manipulacao {
             System.out.println("Digite um valor para a coluna id_junior:");
             int id = sc.nextInt();
             sc.nextLine();
-            System.out.println("Digite um nome para a pessoa:")
-             String nome = sc.nextLine
+            System.out.println("Digite um nome para a pessoa:");
+            String nomes = sc.nextLine();
             // Tentativa de obter a conexão e auto fechá-la ao final do bloco try
             try (Connection connection = conexao.getConnection()) {
                 // Preparar a consulta SQL para inserção, usando placeholders (?)
@@ -20,17 +20,19 @@ public class manipulacao {
                 try (PreparedStatement statement = connection.prepareStatement(sql)) {
                     // Substituir o placeholder pelo valor real
                     statement.setInt(1, id); // Define o valor de id_junior
-                    sql = "INSERT INTO teste (nome) VALUES (?)";
-                    try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                        statement.setInt(1, id);
-                    // Executar a atualização
-                    int linhasAfetadas = statement.executeUpdate();
-                    System.out.println("Linhas afetadas: " + linhasAfetadas);
+                    String sql2 = "INSERT INTO nome (nome_da_pessoa) VALUES (?)";
+                    try (PreparedStatement estado = connection.prepareStatement(sql2)) {
+                        estado.setString(1, nomes);
+                        // Executar a atualização
+                        int linhasAfetadas = estado.executeUpdate();
+                        System.out.println("Linhas afetadas: " + linhasAfetadas);
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
         }
     }
- }
 }
