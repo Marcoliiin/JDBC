@@ -13,6 +13,7 @@ public class manipulacao {
             sc.nextLine();
             System.out.println("Digite um nome para a pessoa:");
             String nomes = sc.nextLine();
+
             // Tentativa de obter a conexão e auto fechá-la ao final do bloco try
             try (Connection connection = conexao.getConnection()) {
                 // Preparar a consulta SQL para inserção, usando placeholders (?)
@@ -20,7 +21,7 @@ public class manipulacao {
                 try (PreparedStatement statement = connection.prepareStatement(sql)) {
                     // Substituir o placeholder pelo valor real
                     statement.setInt(1, id); // Define o valor de id_junior
-                    String sql2 = "INSERT INTO nome (nome_da_pessoa) VALUES (?)";
+                    String sql2 = "INSERT INTO nome (nomedapessoa) VALUES (?)";
                     try (PreparedStatement estado = connection.prepareStatement(sql2)) {
                         estado.setString(1, nomes);
                         // Executar a atualização
