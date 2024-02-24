@@ -15,10 +15,11 @@ public class contas {
             System.out.println("Qual o tipo da conta que você quer criar?\n 1-Conta corrente\n 2-Conta Poupança\n 3-Conta Salário");
             int tipoConta = sc.nextInt();
 
-            String sql = "INSERT INTO conta (id_tipo_conta) VALUES (?)";
-
+            String sql = "INSERT INTO conta (id_tipo_conta,id_cliente) VALUES (?,?)";
+            vinculos.vinculo_conta_cliente();
             try (PreparedStatement sintaxe = connection.prepareStatement(sql)) {
                 sintaxe.setInt(1, tipoConta);
+                sintaxe.setInt(2, tipoConta);
                 int table = sintaxe.executeUpdate();
 
                 System.out.println("Tabela conta afetada? (1 = sim)\n" + table);
