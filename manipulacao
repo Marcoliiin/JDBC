@@ -7,39 +7,8 @@ import java.util.Scanner;
 
 public class manipulacao {
     public static void main(String[] args) {
-        try (Scanner sc = new Scanner(System.in)) {
-            System.out.println("Digite um valor para a coluna id_junior:");
-            int id = sc.nextInt();
-            sc.nextLine();
-            System.out.println("Digite um nome para a pessoa:");
-            String nomes = sc.nextLine();
 
-            // o conexao.getConnection() está chamando o método get.connection da classe conexao
-            try (Connection connection = conexao.getConnection()) {
-                String sql = "INSERT INTO teste (id_junior) VALUES (?)";
 
-                //connection.prepareStatement(sql) literalmente prepara a sql
-                //conectando com o banco de dados, utilizando o PreparedStatement,
-                //que seria uma interface do java que basicamente precompila uma SQL
-                //onde a variável statement recebe a SQL
 
-                try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                    statement.setInt(1, id);
-                    String sql2 = "INSERT INTO nome (nomedapessoa) VALUES (?)";
-                    try (PreparedStatement estado = connection.prepareStatement(sql2)) {
-                        estado.setString(1, nomes);
-                        // Executar a atualização
-                        int linhasAfetadas = estado.executeUpdate();
-                        int linhasAfetadas2 = statement.executeUpdate();
-                        System.out.println("Linhas afetadas: " + linhasAfetadas);
-                        System.out.println("Linhas afetadas2: " + linhasAfetadas);
-                    }
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        }
     }
 }
