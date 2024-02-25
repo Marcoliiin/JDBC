@@ -4,21 +4,27 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.util.Scanner;
 
 public class consultar {
-    public static void main(String[] args) {
-        try {
+    public static void consultar_clientes() {
+        try (Scanner sc = new Scanner(System.in)) {
             Connection connection = conexao.getConnection();
 
-            String sql = "SELECT * FROM clientes";
-            PreparedStatement sintaxe = connection.prepareStatement(sql);
+            System.out.println("Qual é o seu nome?");
+            String nome = sc.nextLine();
 
-            ResultSet query = sintaxe.executeQuery();
-            if (query.next()) {
-                System.out.println("ID do cliente: " + query.getInt(1));
-                System.out.println("Nome do cliente: " + query.getString(2));
-                System.out.println("Sexo do cliente: " + query.getString(3));
-                System.out.println("Endereço do cliente: " + query.getString(4));
+            String sql = "SELECT * FROM clientes where nome = ?";
+            PreparedStatement sintaxe = connection.prepareStatement(sql);
+            sintaxe.setString(1, nome);
+            ResultSet resultado = sintaxe.executeQuery();
+
+            if (resultado.next()) {
+                System.out.println("ID do cliente: " + resultado.getInt(1));
+                System.out.println("Nome do cliente: " + resultado.getString(2));
+                System.out.println("Sexo do cliente: " + resultado.getString(3));
+                System.out.println("Endereço do cliente: " + resultado.getString(4));
+                System.out.println("Data do cadastro: " + resultado.getString(5));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
