@@ -2,6 +2,7 @@ package jdbc.example;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -18,14 +19,21 @@ public class clientes {
             Connection connection = conexao.getConnection();
 
             String sql = "INSERT INTO clientes (nome,sexo,endereco) VALUES (?,?,?)";
+            try (PreparedStatement inserindo_cliente = connection.prepareStatement(sql)) {
+                inserindo_cliente.setString(1, nome);
+                inserindo_cliente.setString(2, sexo);
+                inserindo_cliente.setString(3, endereco);
+                inserindo_cliente.executeUpdate();
 
-            try (PreparedStatement sintaxe = connection.prepareStatement(sql)) {
-                sintaxe.setString(1, nome);
-                sintaxe.setString(2, sexo);
-                sintaxe.setString(3, endereco);
-                int table = sintaxe.executeUpdate();
+                String consulta_nome = "SELECT id FROM clientes WHERE nome = ? ";
+                try (PreparedStatement consultando_nome = connection.prepareStatement(consulta_nome);) {
+                    consultando_nome.setString(1, nome);
+                    ResultSet query = consultando_nome.executeQuery();
+                    if (query.next()) {
+                        System.out.println("O ID do seu perfil é: " + query.getInt(1));
+                    }
 
-                System.out.println("Tabela clientes afetada? (1 = sim)\n" + (table));
+                }
 
             } catch (SQLException e) {
                 e.printStackTrace();
