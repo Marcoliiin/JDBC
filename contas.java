@@ -16,10 +16,12 @@ public class contas {
             int tipoConta = sc.nextInt();
 
             String sql = "INSERT INTO conta (id_tipo_conta,id_cliente) VALUES (?,?)";
+
             vinculos.vinculo_conta_cliente();
+
             try (PreparedStatement sintaxe = connection.prepareStatement(sql)) {
                 sintaxe.setInt(1, tipoConta);
-                sintaxe.setInt(2, tipoConta);
+                sintaxe.setInt(2, vinculos); //estou puxando valor nadave
                 int table = sintaxe.executeUpdate();
 
                 System.out.println("Tabela conta afetada? (1 = sim)\n" + table);
