@@ -10,7 +10,6 @@ public class vinculos {
         try  {
             Connection connection = conexao.getConnection();
 
-
             String sql = "SELECT id FROM clientes where id = ?";
             try (PreparedStatement consultando_id = connection.prepareStatement(sql)) {
                 consultando_id.setString(1, nome);
@@ -22,8 +21,8 @@ public class vinculos {
             if (query.next()) {
                 System.out.println("ID do cliente: " + query.getInt(1));
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }
