@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class contas {
 
-    public static void main(String[] args) {
+    public static void criar_conta() {
         try (Scanner sc = new Scanner(System.in)) {
             Connection connection = conexao.getConnection();
 
@@ -17,11 +17,9 @@ public class contas {
 
             String sql = "INSERT INTO conta (id_tipo_conta,id_cliente) VALUES (?,?)";
 
-            vinculos.vinculo_conta_cliente();
-
             try (PreparedStatement sintaxe = connection.prepareStatement(sql)) {
                 sintaxe.setInt(1, tipoConta);
-                sintaxe.setInt(2, vinculos); //estou puxando valor nadave
+                sintaxe.setInt(2, vinculos); //preciso puxar ID do cliente
                 int table = sintaxe.executeUpdate();
 
                 System.out.println("Tabela conta afetada? (1 = sim)\n" + table);
@@ -29,7 +27,7 @@ public class contas {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        } catch (SQLException ex) {
+        } catch (SQLException e) {
             throw new RuntimeException();
         }
     }
