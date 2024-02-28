@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Vinculos {
     public static int vinculo_produto_fornecedor() {
-        int retorno_fornecedor = -1; // Declare fora do bloco if
+        int retorno_fornecedor = 0 // Declare fora do bloco if
 
         try (Scanner sc = new Scanner(System.in);
              Connection connection = conexao.getConnection()) {
