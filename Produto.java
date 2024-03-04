@@ -28,8 +28,7 @@ public class Produto {
 
         int id_fornecedor = Vinculos.vinculo_produto_fornecedor();
 
-        try (Scanner sc = new Scanner(System.in);
-             Connection connection = Conexao.getConnection()) {
+        try (Connection connection = Conexao.getConnection()) {
 
       /*      System.out.println("Qual é a descrição do produto?");
             String descricao = sc.nextLine();
